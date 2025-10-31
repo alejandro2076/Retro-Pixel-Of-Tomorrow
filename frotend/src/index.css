@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+
+
+@layer base {
+  :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
+        --chart-1: 12 76% 61%;
+        --chart-2: 173 58% 39%;
+        --chart-3: 197 37% 24%;
+        --chart-4: 43 74% 66%;
+        --chart-5: 27 87% 67%;
+        --radius: 0.5rem;
+    }
+  .dark {
+        --background: 0 0% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 0 0% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 0 0% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 0 0% 9%;
+        --secondary: 0 0% 14.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 14.9%;
+        --input: 0 0% 14.9%;
+        --ring: 0 0% 83.1%;
+        --chart-1: 220 70% 50%;
+        --chart-2: 160 60% 45%;
+        --chart-3: 30 80% 55%;
+        --chart-4: 280 65% 60%;
+        --chart-5: 340 75% 55%;
+    }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+}
+
+/* Fuente retro */
+.pixel-font {
+  font-family: "Press Start 2P", cursive;
+  letter-spacing: 1px;
+}
+
+/* Fantasma estilo Pac-Man */
+.ghost {
+  width: 80px;
+  height: 80px;
+  background: #ff69b4;
+  border-radius: 50% 50% 15% 15%;
+  position: relative;
+  animation: floatGhost 2s ease-in-out infinite;
+  box-shadow: 0 0 12px #ff69b4;
+}
+.ghost::before,
+.ghost::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  width: 20px;
+  height: 20px;
+  background: #ff69b4;
+  border-radius: 50%;
+  animation: ghostFeet 0.8s infinite alternate;
+}
+.ghost::before { left: 10px; }
+.ghost::after { right: 10px; }
+
+@keyframes floatGhost {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+@keyframes ghostFeet {
+  from { transform: scaleY(1); }
+  to   { transform: scaleY(0.6); }
+}
+
+/* Space Invader CSS */
+.invader {
+  width: 40px;
+  height: 40px;
+  background: #32cd32;
+  clip-path: polygon(
+    10% 20%, 20% 10%, 80% 10%, 90% 20%, 90% 40%, 10% 40%,
+    10% 70%, 30% 70%, 30% 80%, 40% 80%, 40% 70%,
+    60% 70%, 60% 80%, 70% 80%, 70% 70%, 90% 70%, 90% 40%
+  );
+  animation: spaceInvaders 6s infinite ease-in-out;
+  box-shadow: 0 0 8px #00ff00;
+}
+
+.invader-row .invader:nth-child(2) { animation-delay: 1s; }
+.invader-row .invader:nth-child(3) { animation-delay: 2s; }
+.invader-row .invader:nth-child(4) { animation-delay: 3s; }
+
+@keyframes spaceInvaders {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(40px); }
+  100% { transform: translateX(0); }
+}
+
+/* Ocultar scroll horizontal */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+/* Efectos de fondo para login */
+.grid-background {
+  background-image: 
+    linear-gradient(rgba(255,0,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.floating-pixels .pixel {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Efecto glitch para títulos */
+h2[data-text]::before,
+h2[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+h2[data-text]::before {
+  animation: glitchTop 1s infinite linear alternate-reverse;
+  color: #ff00ff;
+  top: -2px;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+h2[data-text]::after {
+  animation: glitchBottom 1s infinite linear alternate-reverse;
+  color: #00ffff;
+  top: 2px;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchTop {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(2px); }
+  80% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* Scrollbar personalizada para el modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1f2937;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ec4899;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #be185d;
+}
+
+/* Animación para botón de añadir al carrito */
+.add-to-cart-btn.added-animation {
+  background-color: #10b981 !important;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.8);
+}
+
+.add-to-cart-btn.added-animation::after {
+  content: " ✓ Añadido";
+}
+
+/* Efectos de fondo para contact */
+.grid-background {
+  background-image: 
+    linear-gradient(rgba(255,0,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Estilo para el mapa */
+.google-map {
+  filter: contrast(1.1) brightness(0.9);
+}
+
+/* Efecto scanlines con CSS puro */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Aplicar a todo el body para efecto global */
+body.retro-scanlines::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.05) 2px,
+    rgba(255, 255, 255, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
