@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useCart } from '../Context/CartContext.jsx';
 import { useAuth } from '../Context/AuthContext.jsx';
 import { Link } from 'react-router-dom';
+import RetroBackground from './RetroBackground';
 
 const Cart = () => {
   const { 
@@ -57,6 +58,7 @@ const Cart = () => {
 
   return (
     <div id="cart-modal" className={`cart-modal ${isCartOpen ? 'open' : ''}`}>
+      <RetroBackground />
       <div className="cart-modal-content">
         <div className="cart-header">
           <h2>Tu Carrito</h2>
@@ -73,12 +75,14 @@ const Cart = () => {
             </div>
           ) : (
             cartItems.map(item => (
-              <div key={item.id} className="cart-item">
+              <div key={item.id} className="cart-item flex flex-col sm:flex-row">
                 <img 
                   src={item.image} 
                   alt={item.name}
-                  className="cart-item-image"
+                  className="cart-item-image w-20 h-20 sm:w-16 sm:h-16 object-cover"
                   loading="lazy"
+                  width="60"
+                  height="60"
                   aria-label={`Imagen de ${item.name}`}
                 />
                 <div className="cart-item-details">

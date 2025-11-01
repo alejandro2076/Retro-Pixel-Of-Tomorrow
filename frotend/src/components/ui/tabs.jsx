@@ -39,6 +39,3 @@ const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }
-import * as React from "react"
-import * as SheetPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"

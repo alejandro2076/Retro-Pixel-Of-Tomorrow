@@ -38,7 +38,3 @@ const Toggle = React.forwardRef(({ className, variant, size, ...props }, ref) =>
 Toggle.displayName = TogglePrimitive.Root.displayName
 
 export { Toggle, toggleVariants }
-import * as React from "react"
-import * as ToastPrimitives from "@radix-ui/react-toast"
-import { cva } from "class-variance-authority";
-import { X } from "lucide-react"

@@ -1,0 +1,18 @@
+/* RetroBackground.css */
+.retro-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%), url('/public/img/Retro_Pixel_of_Tomorrow.svg');
+  background-size: cover;
+  opacity: 0.7;
+  animation: moveBg 20s linear infinite;
+}
+
+@keyframes moveBg {
+  0% { background-position: 0 0; }
+  100% { background-position: 100vw 100vh; }
+}

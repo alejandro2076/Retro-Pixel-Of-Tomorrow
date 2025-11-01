@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { games } from '../mockData';
 import { useCart } from '../Context/CartContext.jsx';
 import GameModal from '../components/GameModal';
+import { sanitizeInput } from '../utils/sanitize';
 
 const Games = () => {
   const [filteredGames, setFilteredGames] = useState(games);
@@ -122,6 +123,11 @@ const Games = () => {
     setFilteredGames(sorted);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSearchTerm(sanitizeInput(value));
+  };
+
   return (
     <div className="games-page">
       <div className="container">
@@ -139,8 +145,10 @@ const Games = () => {
               type="text"
               placeholder="Buscar juegos..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleInputChange}
               className="search-input"
+              aria-label="Buscar juegos"
+              autoComplete="off"
             />
           </div>
 
@@ -149,6 +157,7 @@ const Games = () => {
               value={filters.category}
               onChange={(e) => handleFilterChange('category', e.target.value)}
               className="filter-select"
+              aria-label="Filtrar por categoría"
             >
               <option value="all">Todas las categorías</option>
               {categories.filter(cat => cat !== 'all').map(category => (

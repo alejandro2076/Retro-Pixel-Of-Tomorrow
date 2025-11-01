@@ -11,6 +11,7 @@ const Login = lazy(() => import('./pages/Login'));
 import Cart from './components/Cart';
 import { CartProvider } from './Context/CartContext.jsx';
 import { AuthProvider } from './Context/AuthContext.jsx';
+import RetroBackground from './components/RetroBackground';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -36,6 +37,7 @@ function App() {
       <CartProvider>
         <BrowserRouter>
           <div className="App">
+            <RetroBackground />
             <Header theme={theme} toggleTheme={toggleTheme} />
             <main>
               <Suspense fallback={<div>Cargando...</div>}>

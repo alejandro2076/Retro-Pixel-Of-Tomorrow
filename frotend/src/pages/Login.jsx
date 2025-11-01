@@ -1,8 +1,19 @@
+/**
+ * Componente de login y registro de usuario.
+ * Permite autenticación, registro y acceso como invitado.
+ * Incluye validación, sanitización y feedback visual accesible.
+ *
+ * @component
+ * @example
+ * return <Login />
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Context/AuthContext';
 import { useCart } from '../Context/CartContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { sanitizeInput } from '../utils/sanitize';
 
 const Logo = '/img/Retro_Pixel_of_Tomorrow.svg';
 
@@ -33,7 +44,7 @@ const Login = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizeInput(value)
     }));
 
     // Limpiar error del campo al escribir
@@ -215,7 +226,7 @@ const Login = () => {
           </div>
 
           {/* Formulario */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" aria-label={isLogin ? 'Formulario de inicio de sesión' : 'Formulario de registro'}>
 
             {/* Campo Usuario */}
             <motion.div
@@ -224,10 +235,11 @@ const Login = () => {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.6 }}
             >
-              <label className="block text-sm font-bold text-gray-300 mb-2">
+              <label htmlFor="username" className="block text-sm font-bold text-gray-300 mb-2">
                 👤 Usuario
               </label>
               <input
+                id="username"
                 type="text"
                 name="username"
                 placeholder="Ingresa tu usuario"
@@ -239,12 +251,17 @@ const Login = () => {
                     : 'border-pink-500 focus:border-yellow-400'
                 }`}
                 disabled={isLoading}
+                aria-invalid={!!errors.username}
+                aria-describedby={errors.username ? 'username-error' : undefined}
+                autoComplete="username"
               />
               {errors.username && (
                 <motion.p 
+                  id="username-error"
                   className="text-red-400 text-sm mt-1 animate-pulse"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  role="alert"
                 >
                   {errors.username}
                 </motion.p>
@@ -383,6 +400,19 @@ const Login = () => {
                 animate={{ opacity: 1, scale: 1 }}
               >
                 {errors.submit}
+              </motion.div>
+            )}
+
+            {/* Mensaje de éxito */}
+            {errors.submit === undefined && !isLoading && Object.keys(errors).length === 0 && formData.username && (
+              <motion.div
+                className="success-message bg-green-500 bg-opacity-20 border border-green-500 rounded-lg p-3 text-green-400 text-center mt-2"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                role="status"
+                aria-live="polite"
+              >
+                ¡Formulario listo para enviar!
               </motion.div>
             )}
 

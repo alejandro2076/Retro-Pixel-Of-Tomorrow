@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { sanitizeInput } from '../utils/sanitize';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -140,7 +141,7 @@ const Contact = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizeInput(value)
     }));
 
     // Limpiar error del campo al escribir
@@ -351,12 +352,16 @@ const Contact = () => {
                     }`}
                     aria-required="true"
                     aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? 'contact-name-error' : undefined}
+                    autoComplete="name"
                   />
                   {errors.name && (
                     <motion.p 
+                      id="contact-name-error"
                       className="text-red-400 text-sm mt-1 animate-pulse"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      role="alert"
                     >
                       {errors.name}
                     </motion.p>
@@ -382,12 +387,16 @@ const Contact = () => {
                     }`}
                     aria-required="true"
                     aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? 'contact-email-error' : undefined}
+                    autoComplete="email"
                   />
                   {errors.email && (
                     <motion.p 
+                      id="contact-email-error"
                       className="text-red-400 text-sm mt-1 animate-pulse"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      role="alert"
                     >
                       {errors.email}
                     </motion.p>
@@ -412,12 +421,16 @@ const Contact = () => {
                         : 'border-pink-500 focus:border-yellow-400'
                     }`}
                     aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
+                    autoComplete="tel"
                   />
                   {errors.phone && (
                     <motion.p 
+                      id="contact-phone-error"
                       className="text-red-400 text-sm mt-1 animate-pulse"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      role="alert"
                     >
                       {errors.phone}
                     </motion.p>
@@ -441,6 +454,7 @@ const Contact = () => {
                     }`}
                     aria-required="true"
                     aria-invalid={!!errors.subject}
+                    aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
                   >
                     <option value="">Selecciona un asunto</option>
                     <option value="consulta-general">Consulta General</option>
@@ -453,9 +467,11 @@ const Contact = () => {
                   </select>
                   {errors.subject && (
                     <motion.p 
+                      id="contact-subject-error"
                       className="text-red-400 text-sm mt-1 animate-pulse"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      role="alert"
                     >
                       {errors.subject}
                     </motion.p>
@@ -481,12 +497,15 @@ const Contact = () => {
                     }`}
                     aria-required="true"
                     aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? 'contact-message-error' : undefined}
                   />
                   {errors.message && (
                     <motion.p 
+                      id="contact-message-error"
                       className="text-red-400 text-sm mt-1 animate-pulse"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      role="alert"
                     >
                       {errors.message}
                     </motion.p>

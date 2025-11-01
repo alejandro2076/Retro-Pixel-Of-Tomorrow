@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { featuredGames, specialOffers, soundtracks } from '../mockData';
-import { useCart } from '../Context/CartContext';
+import { useCart } from '../Context/Cart
 import GameModal from '../components/GameModal';
 import SoundtrackCarousel from '../components/SoundtrackCarousel';
 import { motion } from 'framer-motion';
@@ -49,6 +49,9 @@ const Home = () => {
           src={Logo}
           alt="Retro Pixel Logo"
           className="mx-auto w-72 drop-shadow-[0_0_15px_#FFD700] mb-8"
+          loading="lazy"
+          width="288"
+          height="288"
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -100,7 +103,7 @@ const Home = () => {
           >
             Nuestras Categorías
           </motion.h2>
-          <div className="category-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="category-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <motion.div
               whileHover={{ scale: 1.05, rotate: 1 }}
               transition={{ type: "spring", stiffness: 200 }}
@@ -159,7 +162,7 @@ const Home = () => {
           >
             Juegos Destacados
           </motion.h2>
-          <div className="games-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="games-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredGames.map((game, index) => (
               <motion.div
                 key={game.id}
@@ -170,7 +173,14 @@ const Home = () => {
                 whileHover={{ scale: 1.05, rotate: 1 }}
               >
                 <div className="game-image">
-                  <img src={game.image} alt={game.name} className="w-full h-48 object-cover" />
+                  <img 
+                    src={game.image} 
+                    alt={game.name}
+                    className="w-full h-48 object-cover" 
+                    loading="lazy"
+                    width="400"
+                    height="192"
+                  />
                 </div>
                 <div className="game-info p-6">
                   <h3 className="game-name text-xl font-bold text-white mb-2">{game.name}</h3>
@@ -208,7 +218,7 @@ const Home = () => {
           >
             Ofertas Especiales
           </motion.h2>
-          <div className="offers-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="offers-grid grid grid-cols-1 sm:grid-cols-2 gap-8">
             {specialOffers.map((offer, index) => (
               <motion.div
                 key={offer.id}
@@ -227,6 +237,14 @@ const Home = () => {
                   <span className="original-price text-gray-500 line-through text-xl">${offer.originalPrice}</span>
                   <span className="discounted-price text-yellow-400 text-3xl font-bold">${offer.discountedPrice}</span>
                 </div>
+                <img 
+                  src={offer.image}
+                  alt={offer.title}
+                  className="w-full h-48 object-cover"
+                  loading="lazy"
+                  width="400"
+                  height="192"
+                />
                 <button className="btn btn-primary bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-pink-500 hover:text-white transition-all duration-300 w-full">
                   Aprovechar Oferta
                 </button>
@@ -259,18 +277,21 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            aria-label="Formulario de suscripción al newsletter"
           >
             <input
               type="email"
               placeholder="Tu email"
               value={newsletter}
               onChange={(e) => setNewsletter(e.target.value)}
-              className="newsletter-input flex-1 px-4 py-3 rounded-lg bg-black border-2 border-pink-500 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 transition-all duration-200"
+              className="newsletter-input flex-1 px-4 py-3 rounded-lg bg-black border-2 border-pink-500 text-white focus:border-yellow-400 focus:ring-2 focus:ring-yellow-300 transition-all duration-200 min-w-0"
               required
+              aria-label="Email para suscripción"
+              autoComplete="email"
             />
             <button
               type="submit"
-              className="newsletter-btn bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-[0_0_10px_#FFD700]"
+              className="newsletter-btn bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-[0_0_10px_#FFD700] w-full md:w-auto"
             >
               Suscribirse
             </button>
