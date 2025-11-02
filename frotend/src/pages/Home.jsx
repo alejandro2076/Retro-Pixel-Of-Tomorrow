@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { featuredGames, specialOffers, soundtracks } from '../mockData';
-import { useCart } from '../Context/Cart
+import { useCart } from '../Context/CartContext';
 import GameModal from '../components/GameModal';
 import SoundtrackCarousel from '../components/SoundtrackCarousel';
 import { motion } from 'framer-motion';
